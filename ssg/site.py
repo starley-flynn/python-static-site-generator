@@ -18,7 +18,7 @@ class Site:
             if path.is_dir():
                 self.create_dir(path)
 
-    def main(self, source = "content", dest = "dist"):
+    def main(source = "content", dest = "dist"):
         config = {"source" : source, "dest": dest}
         Site(**config).build()
 
