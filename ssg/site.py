@@ -1,6 +1,5 @@
 from pathlib import Path
-import typer
-from ssg.site import Site
+
 
 class Site:
 
@@ -17,9 +16,3 @@ class Site:
         for path in self.source.rglob("*"):
             if path.is_dir():
                 self.create_dir(path)
-
-    def main(source = "content", dest = "dist"):
-        config = {"source" : source, "dest": dest}
-        Site(**config).build()
-
-    typer.run(main)
