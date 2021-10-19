@@ -1,6 +1,5 @@
 import re
-from yaml import load
-from yaml import FullLoader
+from yaml import load, FullLoader
 from collections.abc import Mapping
 
 class Content(Mapping):
@@ -8,5 +7,8 @@ class Content(Mapping):
     __delimeter = '"^(?:-|\+)'
     __regex = re.compile(__delimeter, re.MULTILINE)
 
-    def load(self, cls, str):
-        return str
+    @classmethod
+    def load(cls, string):
+        _, fm, content = cls.__regex.split(string, 2)
+        metadata = load(fm, Loader=FullLoader)
+        return cls(metadata, content)
